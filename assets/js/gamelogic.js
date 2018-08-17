@@ -1,6 +1,6 @@
 let playerX = 10;
 let playerY = 10;
-let gridSize = 20;
+const gridSize = 20;
 const tileCount = 20;
 let appleX = 15;
 let appleY = 15;
@@ -88,7 +88,8 @@ function keyPush(event) {
     }
 }
 
-// Call the game every 50 milliseconds (20 times every second)
+// Call the game logic every 15 seconds
 setInterval(game, 1000 / 15);
 
+// Add listener for user keydown arrow keys
 document.addEventListener('keydown', keyPush);
