@@ -29,9 +29,20 @@ function game() {
         playerY = 0;
     }
 
+    ctx.fillStyle = 'darkgrey';
+    ctx.fillRect(0, 0, gameboard.width + 50, gameboard.height + 50);
+
+    ctx.fillStyle = 'lightgrey';
+    ctx.fillRect(5, 5, gameboard.width - 5, 5);
+    ctx.fillRect(5, 5, 5, gameboard.height - 5);
+
+    ctx.fillStyle = 'grey';
+    ctx.fillRect(5, 445, gameboard.width - 5, 5);
+    ctx.fillRect(595, 5, 5, gameboard.height - 5);
+
     // Make the entire gameboard black
     ctx.fillStyle = 'black';
-    ctx.fillRect(0, 0, gameboard.width, gameboard.height);
+    ctx.fillRect(25, 25, gameboard.width - 50, gameboard.height - 50);
 
     // Color the snake green
     ctx.fillStyle = 'lime';
@@ -88,8 +99,27 @@ function keyPush(event) {
     }
 }
 
-// Call the game logic every 15 seconds
-setInterval(game, 1000 / 15);
+let test = true;
+
+function waitingForCoins() {
+
+    if(test) {
+        ctx.font = "20px Verdana";
+        ctx.fillStyle = 'white';
+        ctx.fillText("Waiting for coins. . .", 210, 200);
+    } else {
+        ctx.font = "20px Verdana";
+        ctx.fillStyle = 'black';
+        ctx.fillText("Waiting for coins. . .", 210, 200);
+    }
+
+    test = !test;
+}
+
+
+game();
+
+setInterval(waitingForCoins, 1000);
 
 // Add listener for user keydown arrow keys
 document.addEventListener('keydown', keyPush);
