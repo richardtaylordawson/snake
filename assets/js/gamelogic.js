@@ -1,18 +1,47 @@
 let playerX = 10;
 let playerY = 10;
-const gridSize = 20;
-const tileCount = 20;
+const gridSize = 15;
+const tileCount = 15;
 let appleX = 15;
 let appleY = 15;
 let xVelocity = 0;
 let yVelocity = 0;
 const trail = [];
 let tail = 5;
-
+let bool = true;
+let coinMessageInterval;
 const gameboard = document.getElementById('gameboard');
 const ctx = gameboard.getContext('2d');
 
-function game() {
+function setupGameMonitor() {
+    // Monitor Border
+    ctx.fillStyle = 'darkgrey';
+    ctx.fillRect(0, 0, gameboard.width + 50, 450);
+
+    // Monitor Shading
+    ctx.fillStyle = 'lightgrey';
+    ctx.fillRect(5, 5, gameboard.width - 5, 5);
+    ctx.fillRect(5, 5, 5, 445);
+    ctx.fillStyle = 'grey';
+    ctx.fillRect(5, 445, gameboard.width - 5, 5);
+    ctx.fillRect(595, 5, 5, 445);
+
+    // Back Monitor Screen
+    ctx.fillStyle = 'black';
+    ctx.fillRect(25, 25, gameboard.width - 50, 400);
+
+    // Monitor Stand
+    ctx.fillStyle = 'rgb(200,200,200)';
+    ctx.fillRect(200, 450, 200, 60);
+    ctx.fillStyle = 'darkgrey';
+    ctx.fillRect(50, 500, 500, 25);
+
+    // Monitor Stand Shading
+    ctx.fillStyle = '#999999';
+    ctx.fillRect(50, 525, 500, 5);
+}
+
+function startGameLogic() {
     playerX += xVelocity;
     playerY += yVelocity;
 
@@ -28,21 +57,6 @@ function game() {
     if (playerY > tileCount - 1) {
         playerY = 0;
     }
-
-    ctx.fillStyle = 'darkgrey';
-    ctx.fillRect(0, 0, gameboard.width + 50, gameboard.height + 50);
-
-    ctx.fillStyle = 'lightgrey';
-    ctx.fillRect(5, 5, gameboard.width - 5, 5);
-    ctx.fillRect(5, 5, 5, gameboard.height - 5);
-
-    ctx.fillStyle = 'grey';
-    ctx.fillRect(5, 445, gameboard.width - 5, 5);
-    ctx.fillRect(595, 5, 5, gameboard.height - 5);
-
-    // Make the entire gameboard black
-    ctx.fillStyle = 'black';
-    ctx.fillRect(25, 25, gameboard.width - 50, gameboard.height - 50);
 
     // Color the snake green
     ctx.fillStyle = 'lime';
@@ -72,6 +86,12 @@ function game() {
 
 }
 
+function startGame() {
+    clearInterval(coinMessageInterval);
+    setupGameMonitor();
+    setInterval(startGameLogic, 1000 / 15);
+}
+
 function keyPush(event) {
     switch (event.keyCode) {
     // Left Arrow
@@ -94,32 +114,47 @@ function keyPush(event) {
         xVelocity = 0;
         yVelocity = 1;
         break;
+    // Space Bar
+    case 32:
+        startGame();
+        break;
     default:
         break;
     }
 }
 
-let test = true;
+function setupLeaderboardAndCoinMessage() {
+    // Text Styling
+    ctx.font = '20px Verdana';
+    ctx.fillStyle = '#aaaaaa';
+    ctx.textAlign = 'center';
 
-function waitingForCoins() {
+    // Display Fake Leaderboard
+    ctx.fillText('Leaderboard', 300, 100);
+    ctx.fillText('1. Captain America   -   1500', 300, 150);
+    ctx.fillText('2. Iron Man  -   750', 300, 175);
+    ctx.fillText('3. Thor   -   500', 300, 200);
+    ctx.fillText('4. Ant Man  -   250', 300, 225);
+    ctx.fillText('5. Thanos   -   100', 300, 250);
 
-    if(test) {
-        ctx.font = "20px Verdana";
-        ctx.fillStyle = 'white';
-        ctx.fillText("Waiting for coins. . .", 210, 200);
+    // Flash a blinking message to press spacebar to play
+    if (bool) {
+        ctx.fillStyle = 'lime';
+        ctx.fillText('Press space bar to play', 300, 350);
     } else {
-        ctx.font = "20px Verdana";
         ctx.fillStyle = 'black';
-        ctx.fillText("Waiting for coins. . .", 210, 200);
+        ctx.fillText('Press space bar to play', 300, 350);
     }
 
-    test = !test;
+    // Change bool to flash message next time around
+    bool = !bool;
 }
 
-
-game();
-
-setInterval(waitingForCoins, 1000);
+// Setup game monitor and flashing coin message onload
+window.onload = () => {
+    setupGameMonitor();
+    coinMessageInterval = setInterval(setupLeaderboardAndCoinMessage, 1000);
+};
 
 // Add listener for user keydown arrow keys
 document.addEventListener('keydown', keyPush);

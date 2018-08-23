@@ -1,27 +1,22 @@
-canvas {
+/* Places the game board in the middle of the screen */
+#gameboard {
     position: absolute;
-    top: -250px;
+    top: -100px;
     bottom: 0;
     left: 0;
     right: 0;
     margin:auto;
 }
 
-button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-}
-
-button:hover {
-    cursor: pointer;
+/* Creates a radial gradient for the entire background */
+html {
+    height: 100%;
 }
 
 body {
-    background-color: #efefef;
+    background-image: radial-gradient(white, lightgrey, black);
+    background-repeat: no-repeat;
+    height: 100%;
+    margin: 0;
+    background-attachment: fixed;
 }
