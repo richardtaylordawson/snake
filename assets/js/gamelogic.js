@@ -1,6 +1,5 @@
 let playerX;
 let playerY;
-let playerScore = 0;
 const gridSize = 20;
 const tileCountX = 28;
 const tileCountY = 20;
@@ -103,7 +102,6 @@ function setupGame() {
     // Game Defaults
     playerX = 10;
     playerY = 10;
-    playerScore = 0;
     appleX = 14;
     appleY = 10;
     xVelocity = 1;
@@ -122,7 +120,7 @@ function setupGame() {
 function endGame() {
     gameIsStarted = false;
     clearInterval(startGameLogicInterval);
-    const tempScore = playerScore;
+    const tempScore = (tail - 5) * 25;
     setupGame();
     alert(`Game over. Your score was ${tempScore}`);
 }
@@ -162,10 +160,13 @@ function startGameLogic() {
     }
 
     if (appleX === playerX && appleY === playerY) {
-        playerScore = (tail - 5) * 5;
         tail += 1;
-        appleX = Math.floor(Math.random() * tileCountX);
-        appleY = Math.floor(Math.random() * tileCountY);
+        let apple = true;
+        while (apple) {
+            appleX = Math.floor(Math.random() * tileCountX);
+            appleY = Math.floor(Math.random() * tileCountY);
+            apple = trail.includes({x: appleX, y: appleY});
+        }
     }
 
     // Place the apple
