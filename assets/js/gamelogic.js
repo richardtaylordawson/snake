@@ -11,9 +11,12 @@ let yVelocity;
 let trail;
 let tail;
 let bool = true;
+let gameIsStarted = false;
 let coinMessageInterval;
 let startGameLogicInterval;
 let currentDirection;
+let drawNextImageInterval;
+let imageName;
 const gameboard = document.getElementById('gameboard');
 const ctx = gameboard.getContext('2d');
 
@@ -72,6 +75,30 @@ function setupLeaderboardAndCoinMessage() {
     bool = !bool;
 }
 
+function drawNextImage() {
+    // Draw new image
+    const coinImage = new Image();
+    coinImage.onload = () => {
+        ctx.drawImage(coinImage, 250, 325);
+
+        // Next Image
+        imageName += 1;
+
+        // Check if images are complete
+        if (imageName === 13) {
+            // Redraw the canvas
+            setupGameMonitor();
+
+            // Coin message/leaderboard
+            coinMessageInterval = setInterval(setupLeaderboardAndCoinMessage, 1000);
+
+            // Stop Loading Icon
+            clearInterval(drawNextImageInterval);
+        }
+    };
+    coinImage.src = `assets/gif/${imageName}.gif`;
+}
+
 function setupGame() {
     // Game Defaults
     playerX = 10;
@@ -79,18 +106,21 @@ function setupGame() {
     playerScore = 0;
     appleX = 14;
     appleY = 10;
-    xVelocity = 0;
+    xVelocity = 1;
     yVelocity = 0;
     trail = [];
     tail = 5;
+    imageName = 0;
 
-    // Setup Game monitor and coin message/leaderboard
+    // Setup Game Monitor
     setupGameMonitor();
-    // TODO Loading Icon Here
-    coinMessageInterval = setInterval(setupLeaderboardAndCoinMessage, 1000);
+
+    // Loading Icon
+    drawNextImageInterval = setInterval(drawNextImage, 150);
 }
 
 function endGame() {
+    gameIsStarted = false;
     clearInterval(startGameLogicInterval);
     const tempScore = playerScore;
     setupGame();
@@ -105,6 +135,7 @@ function startGameLogic() {
     // Check if the player hit a wall and end the game
     if (playerX <= -2 || playerY <= -2 || playerX > 28 || playerY > 20) {
         endGame();
+        return;
     }
 
     // Display the black monitor again
@@ -116,6 +147,11 @@ function startGameLogic() {
         ctx.fillRect(trail[i].x * gridSize + 26, trail[i].y * gridSize + 26, gridSize - 2, gridSize - 2);
         if (trail[i].x === playerX && trail[i].y === playerY) {
             tail = 5;
+
+            if (gameIsStarted) {
+                endGame();
+                return;
+            }
         }
     }
 
@@ -138,6 +174,7 @@ function startGameLogic() {
 }
 
 function startGame() {
+    gameIsStarted = true;
     clearInterval(coinMessageInterval);
     startGameLogicInterval = setInterval(startGameLogic, 1000 / 15);
 }
@@ -147,7 +184,7 @@ function keyPush(event) {
     if ((currentDirection === 'west' && event.keyCode === 39) ||
         (currentDirection === 'north' && event.keyCode === 40) ||
         (currentDirection === 'east' && event.keyCode === 37) ||
-        (currentDirection === 'west' && event.keyCode === 38)) {
+        (currentDirection === 'south' && event.keyCode === 38)) {
         return;
     }
 
