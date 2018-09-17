@@ -6,5 +6,4 @@ Complete. I finished this enough to enjoy playing the game, however, I know ther
 
 https://richardtaylordawson.github.io/snake/
 
-![](snake.mp3)
 ![Main Screen](assets/img/main.png) ![Gameplay](assets/img/gameplay.png)
