@@ -1,8 +1,5 @@
 let playerX;
 let playerY;
-const gridSize = 20;
-const tileCountX = 28;
-const tileCountY = 20;
 let appleX;
 let appleY;
 let xVelocity;
@@ -16,9 +13,37 @@ let startGameLogicInterval;
 let currentDirection;
 let drawNextImageInterval;
 let imageName;
+
+/**
+ * Total size of the grid
+ * @constant gridSize
+ * @type {number}
+ * @default
+ */
+const gridSize = 20;
+
+/**
+ * Number of tiles on the x-axis
+ * @constant tileCountX
+ * @type {number}
+ * @default
+ */
+const tileCountX = 28;
+
+/**
+ * Number of tiles on the y-axis
+ * @constant tileCountY
+ * @type {number}
+ * @default
+ */
+const tileCountY = 20;
+
 const gameboard = document.getElementById('gameboard');
 const ctx = gameboard.getContext('2d');
 
+/**
+ * Draws the computer monitor and screen so it is ready for the game
+ */
 function setupGameMonitor() {
     // Monitor Border
     ctx.fillStyle = 'darkgrey';
@@ -47,7 +72,10 @@ function setupGameMonitor() {
     ctx.fillRect(62.5, 525, 500, 5);
 }
 
-function setupLeaderboardAndCoinMessage() {
+/**
+ * Shows the leaderboard on the screen with spacebar
+ */
+function setupLeaderboardAndSpaceBarMessage() {
     // Text Styling
     ctx.font = '20px Verdana';
     ctx.fillStyle = '#aaaaaa';
@@ -74,6 +102,9 @@ function setupLeaderboardAndCoinMessage() {
     bool = !bool;
 }
 
+/**
+ * Draws an image in the list of loading images
+ */
 function drawNextImage() {
     // Draw new image
     const coinImage = new Image();
@@ -89,7 +120,7 @@ function drawNextImage() {
             setupGameMonitor();
 
             // Coin message/leaderboard
-            coinMessageInterval = setInterval(setupLeaderboardAndCoinMessage, 1000);
+            coinMessageInterval = setInterval(setupLeaderboardAndSpaceBarMessage, 1000);
 
             // Stop Loading Icon
             clearInterval(drawNextImageInterval);
@@ -98,6 +129,9 @@ function drawNextImage() {
     coinImage.src = `assets/gif/${imageName}.gif`;
 }
 
+/**
+ * Sets the game state back to game defaults
+ */
 function setupGame() {
     // Game Defaults
     playerX = 10;
@@ -117,6 +151,9 @@ function setupGame() {
     drawNextImageInterval = setInterval(drawNextImage, 150);
 }
 
+/**
+ * Ends the game by alerting the final score and resetting the game state
+ */
 function endGame() {
     gameIsStarted = false;
     clearInterval(startGameLogicInterval);
@@ -125,6 +162,9 @@ function endGame() {
     alert(`Game over. Your score was ${tempScore}`);
 }
 
+/**
+ * Sets up the game logic for snake
+ */
 function startGameLogic() {
     // Up the X & Y velocity
     playerX += xVelocity;
@@ -174,12 +214,19 @@ function startGameLogic() {
     ctx.fillRect(appleX * gridSize + 26, appleY * gridSize + 26, gridSize - 2, gridSize - 2);
 }
 
+/**
+ * Starts the Snake game with loading and leaderboard message
+ */
 function startGame() {
     gameIsStarted = true;
     clearInterval(coinMessageInterval);
     startGameLogicInterval = setInterval(startGameLogic, 1000 / 15);
 }
 
+/**
+ * Called on keydown event to move the snake direction
+ * @param {object} event - Browser event object used to look at key code
+ */
 function keyPush(event) {
     // Check if the user is trying to go the opposite direction and don't allow it
     if ((currentDirection === 'west' && event.keyCode === 39) ||
@@ -190,36 +237,36 @@ function keyPush(event) {
     }
 
     switch (event.keyCode) {
-    // Left Arrow
-    case 37:
-        xVelocity = -1;
-        yVelocity = 0;
-        currentDirection = 'west';
-        break;
-    // Up Arrow
-    case 38:
-        xVelocity = 0;
-        yVelocity = -1;
-        currentDirection = 'north';
-        break;
-    // Right Arrow
-    case 39:
-        xVelocity = 1;
-        yVelocity = 0;
-        currentDirection = 'east';
-        break;
-    // Down Arrow
-    case 40:
-        xVelocity = 0;
-        yVelocity = 1;
-        currentDirection = 'south';
-        break;
-    // Space Bar
-    case 32:
-        startGame();
-        break;
-    default:
-        break;
+        // Left Arrow
+        case 37:
+            xVelocity = -1;
+            yVelocity = 0;
+            currentDirection = 'west';
+            break;
+        // Up Arrow
+        case 38:
+            xVelocity = 0;
+            yVelocity = -1;
+            currentDirection = 'north';
+            break;
+        // Right Arrow
+        case 39:
+            xVelocity = 1;
+            yVelocity = 0;
+            currentDirection = 'east';
+            break;
+        // Down Arrow
+        case 40:
+            xVelocity = 0;
+            yVelocity = 1;
+            currentDirection = 'south';
+            break;
+        // Space Bar
+        case 32:
+            startGame();
+            break;
+        default:
+            break;
     }
 }
 
