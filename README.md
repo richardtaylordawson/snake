@@ -6,7 +6,7 @@
 
 ```shell
 $ yarn
-$ yarn start
+$ yarn develop
 ```
 
 ## Deployment

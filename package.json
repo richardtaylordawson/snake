@@ -29,7 +29,7 @@
     "run-sequence": "^2.2.1"
   },
   "scripts": {
-    "start": "gulp default",
+    "develop": "gulp default",
     "build": "gulp build",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   }
