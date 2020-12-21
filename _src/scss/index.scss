@@ -1,0 +1,22 @@
+/* Places the game board in the middle of the screen */
+#gameboard {
+  position: absolute;
+  top: -100px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+html {
+  height: 100%;
+}
+
+/* Creates a radial gradient for the entire background */
+body {
+  background-image: radial-gradient(white, lightgrey, black);
+  background-repeat: no-repeat;
+  height: 100%;
+  margin: 0;
+  background-attachment: fixed;
+}
