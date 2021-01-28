@@ -40,8 +40,21 @@
 
   <!-- Custom Styling -->
   <link href="/css/index.css" type="text/css" rel="stylesheet"/>
+
+  <!-- PWA Install Button -->
+  <script
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/@pwabuilder/pwainstall"
+  ></script>
 </head>
 <body>
+  <button id="install-button">Install +</button>
+  <pwa-install
+    usecustom
+    iconpath="https://snake.richardtaylordawson.com/images/favicon.png"
+    manifestpath="/manifest.json"
+  ></pwa-install>
+
   <!-- Snake Gameboard -->
   <canvas id="gameboard" width="610" height="550"></canvas>
 
