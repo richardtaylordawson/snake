@@ -9,13 +9,13 @@
   "description": "Snake game built using HTML5 Canvas & Javascript.",
   "screenshots": [
     {
-      "src":"https://snake.richardtaylordawson.com/images/screenshots/desktop-normal.png"
+      "src":"https://snake.richardtaylordawson.com/images/screenshots/gameplay.png"
     },
     {
-      "src":"https://snake.richardtaylordawson.com/images/screenshots/mobile-journal.png"
+      "src":"https://snake.richardtaylordawson.com/images/screenshots/leaderboard.png"
     },
     {
-      "src":"https://snake.richardtaylordawson.com/images/screenshots/desktop-dark.png"
+      "src":"https://snake.richardtaylordawson.com/images/screenshots/score.png"
     }
   ],
   "icons": [{
