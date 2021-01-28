@@ -30,7 +30,8 @@ if (installBtn !== null) {
     setShowInstallBtn(
       isIOS ||
         (isSupportingBrowser &&
-          (localStorage.getItem("snakeInstalled") === "" ||
+          (localStorage.getItem("snakeInstalled") === null ||
+            localStorage.getItem("snakeInstalled") === "" ||
             localStorage.getItem("snakeInstalled") === "false"))
     )
 
