@@ -29,4 +29,7 @@ pwa-install::part(openButton) {
   position: absolute;
   top: 20px;
   right: 20px;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 3px;
 }

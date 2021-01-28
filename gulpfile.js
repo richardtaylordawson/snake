@@ -20,14 +20,20 @@ gulp.task("images", () => {
   return del.sync("dist/images")
 })
 
-gulp.task("js", () =>
+gulp.task("js", () => {
   gulp
+    .src("_src/sw.js")
+    .pipe(rollup({ plugins: [babel()] }, { format: "cjs" }))
+    .pipe(uglify())
+    .pipe(gulp.dest("dist/"))
+
+  return gulp
     .src("_src/js/index.js")
     .pipe(rollup({ plugins: [babel()] }, { format: "cjs" }))
     .pipe(uglify())
     .pipe(gulp.dest("dist/js"))
     .pipe(browserSync.reload({ stream: true }))
-)
+})
 
 gulp.task("scss", () =>
   gulp
