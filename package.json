@@ -24,7 +24,7 @@
     "gulp-imagemin": "^5.0.3",
     "gulp-sass": "^4.0.2",
     "gulp-uglify": "^3.0.2",
-    "rollup": "^1.19.4",
+    "rollup": "^2.79.2",
     "rollup-plugin-babel": "^4.3.3",
     "run-sequence": "^2.2.1"
   },
