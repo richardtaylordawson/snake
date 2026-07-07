@@ -12,25 +12,16 @@
     "url": "https://github.com/richardtaylordawson/snake/issues"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "browser-sync": "^2.26.3",
-    "del": "^4.1.0",
-    "gulp": "^3.9.0",
-    "gulp-better-rollup": "^4.0.1",
-    "gulp-cache": "^1.1.1",
-    "gulp-clean-css": "^4.2.0",
-    "gulp-htmlmin": "^5.0.1",
-    "gulp-imagemin": "^5.0.3",
-    "gulp-sass": "^4.0.2",
-    "gulp-uglify": "^3.0.2",
-    "rollup": "^2.79.2",
-    "rollup-plugin-babel": "^4.3.3",
-    "run-sequence": "^2.2.1"
+    "prettier": "^3.9.4",
+    "sass": "^1.101.0",
+    "vite": "^8.0.16"
   },
   "scripts": {
-    "develop": "gulp default",
-    "build": "gulp build",
+    "dev": "vite --host 0.0.0.0",
+    "develop": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
-  }
+  },
+  "packageManager": "yarn@4.15.0+sha512.07ec708ac11e2eaa4ea2b04cfbb272812f7e74a753f1595eaef4486c663a98306a30cca3e6fc40f7a0b168dcfb3a2490b6a5e0501e20fb69cc36f563dd161c53"
 }

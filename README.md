@@ -5,7 +5,10 @@
 ## Run Project
 
 ```shell
-# requires node v11 or earlier
-$ yarn
+$ yarn install
 $ yarn develop
 ```
+
+## View Project
+
+<https://snake.richardtaylordawson.com>

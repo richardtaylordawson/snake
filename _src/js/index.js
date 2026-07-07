@@ -1,10 +1,3 @@
-import "./utils/install-button"
-
-// Register service worker
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js")
-}
-
 let playerX
 let playerY
 let appleX
