@@ -8,9 +8,6 @@
     "type": "git",
     "url": "git+https://github.com/richardtaylordawson/snake.git"
   },
-  "bugs": {
-    "url": "https://github.com/richardtaylordawson/snake/issues"
-  },
   "devDependencies": {
     "prettier": "^3.9.4",
     "sass": "^1.101.0",
