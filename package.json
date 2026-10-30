@@ -11,7 +11,7 @@
   "devDependencies": {
     "prettier": "^3.9.4",
     "sass": "^1.101.0",
-    "vite": "^8.1.6"
+    "vite": "^8.3.5"
   },
   "scripts": {
     "dev": "vite --host 0.0.0.0",
